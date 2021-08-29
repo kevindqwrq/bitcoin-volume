@@ -1,0 +1,17 @@
+import=pyupbit
+
+def get_max_volume():
+#coins = pyupbit.get_tickers(fiat ="KRW")
+ = ['KRW-BTC', 'KRW-XRP', 'KRW-BTG', 'KRW-ETC', 'KRW-ADA', 'KRW-BCH', 'KRW-AXS', 'KRW-QTUM', 'KRW-NEO', 'KRW-BTT']
+volume_rate = []
+for i in range(10): #10개만 보는거
+coin = coins[i]
+data = pyupbit.get_ohlcv(ticker = coin, interval='minute5', count=2)
+volume_change_rate = float(data.volume[1]) - float(data.volume[0])
+
+print("다음 코인:" + coin + "의 5분간 거래 변화량: " + str(volume_change_rate))
+volume_rate.append(volume_change_rate)
+max_index = find_max(volume_rate)
+print()
+print("5분간 최대 변화량의 코인은: "+coins[max_index]+" 값은: " + str(volume_rate[max_index]))
+return coins[max_index]
